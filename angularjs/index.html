@@ -1,0 +1,59 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <link rel="stylesheet" href="styles.css">
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+    </head>          
+    <body>
+        <div class="container h-100">
+            <div class="row align-items-start justify-content-center h-100 my-5">
+                <div ng-app="TestApp" ng-controller="TestCtrl" class="card border-dark box-shadow">
+                    <div class="card-body">
+                        <h5 class="card-title text-center">NFL Players</h5>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <div class="dropdown d-inline-block">
+                                <button type="button" class="btn btn-sm btn-light dropdown-toggle" id="sortMode" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Sort By: <span class="font-weight-bold">{{sortMode}}</span>
+                                </button>
+                                <div class="dropdown-menu" aria-labelledby="sortMode">
+                                    <button ng-click="changeSortMode('Team')" type="button" class="dropdown-item">
+                                        Team
+                                    </button>
+                                    <button ng-click="changeSortMode('Position')" type="button" class="dropdown-item">
+                                        Position
+                                    </button>
+                                </div>
+                                </div>
+                                <button ng-click="toggleSortDir()" type="button" class="btn btn-sm btn-light font-weight-bold" ng-class="{'flip-text': sortDesc}">
+                                    &#94;
+                                </button>
+                            </div>
+                            <div>
+                                <input type="number" class="num-filter form-control d-inline-block" ng-model="minNumber" ng-change="changeMin()" />
+                                <span class="font-weight-bold px-2">-</span>
+                                <input type="number" class="num-filter form-control d-inline-block" ng-model="maxNumber" ng-change="changeMax()" />
+                            </div>
+                        </div>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <li ng-repeat="player in results" class="list-group-item">
+                            <div class="d-flex align-items-center justify-content-between">
+                                <div>
+                                    <span class="font-weight-bold">{{player.Name}}</span> - {{player.Number}}<br />{{player.Team}}
+                                </div>
+                                <h4 class="m-0">
+                                    {{player.Position}}
+                                </h4>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <script src="app.js"></script>
+    </body>
+</html>
