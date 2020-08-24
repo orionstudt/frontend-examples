@@ -1,0 +1,42 @@
+<div class="card border-dark box-shadow">
+    <div class="card-body">
+        <h5 class="card-title text-center">NFL Players</h5>
+        <div class="d-flex justify-content-between align-items-center">
+            <div>
+                <div class="dropdown d-inline-block">
+                <button type="button" class="btn btn-sm btn-light dropdown-toggle" id="sortMode" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Sort By: <span class="font-weight-bold">{{sortMode}}</span>
+                </button>
+                <div class="dropdown-menu" aria-labelledby="sortMode">
+                    <button type="button" on-click="changeSortMode('Team')" class="dropdown-item">
+                        Team
+                    </button>
+                    <button type="button" on-click="changeSortMode('Position')" class="dropdown-item">
+                        Position
+                    </button>
+                </div>
+                </div>
+                <button type="button" on-click="toggleSortDir()" class="btn btn-sm btn-light font-weight-bold" [ngClass]="{'flip-text': sortDesc}">
+                    &#94;
+                </button>
+            </div>
+            <div>
+                <input type="number" class="num-filter form-control d-inline-block" [(ngModel)]="minNumber" min="0" [max]="(maxNumber - 1)" (change)="refresh()" />
+                <span class="font-weight-bold px-2">-</span>
+                <input type="number" class="num-filter form-control d-inline-block" [(ngModel)]="maxNumber" [min]="(minNumber + 1)" max="100" (change)="refresh()" />
+            </div>
+        </div>
+    </div>
+    <ul class="list-group list-group-flush">
+        <li *ngFor="let player of results" class="list-group-item">
+            <div class="d-flex align-items-center justify-content-between">
+                <div>
+                    <span class="font-weight-bold">{{player.Name}}</span> - {{player.Number}}<br />{{player.Team}}
+                </div>
+                <h4 class="m-0">
+                    {{player.Position}}
+                </h4>
+            </div>
+        </li>
+    </ul>
+</div>
